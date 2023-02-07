@@ -41,6 +41,7 @@ const productSchema = new Schema({
       "Kitchen Supplies",
       "Appliances",
       "Linens",
+      "General",
     ],
     default: "General",
   },

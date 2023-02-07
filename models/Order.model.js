@@ -28,6 +28,20 @@ const orderSchema = new Schema({
     enum: ["Credit Card", "Cash", "PayPal"],
   },
 
+  ammountToPay: {
+    type: number,
+  },
+
+  status: {
+    enum: ["pending", "delivered", "shipped", "canceled"],
+    default: "pending",
+  },
+
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+
   products: [
     {
       product: {

@@ -3,6 +3,13 @@ const { Schema, model } = require("mongoose");
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
+    username: {
+      type: String,
+      require: [true, "Username is required"],
+      unique: true,
+      lowercase: true,
+      minlengh: [3, "Username must have at least 3 characters"],
+    },
     email: {
       type: String,
       required: [true, "Email is required."],
@@ -12,6 +19,16 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, "Password is required."],
+    },
+
+    role: {
+      type: String,
+      enum: ["USER", "OWNER", "ADMIN"],
+      default: "USER",
+    },
+
+    bio: {
+      type: String,
     },
 
     profileImg: {

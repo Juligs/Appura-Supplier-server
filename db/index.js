@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/appura";
+const MONGO_URI =
+  process.env.MONGODB_URI ||
+  "mongodb+srv://Julicodes:Cyrusmilotoby120819@cluster0.rvajdov.mongodb.net/appura";
 
 mongoose
   .connect(MONGO_URI)
