@@ -17,9 +17,7 @@ const orderSchema = new Schema({
     },
     coordinates: [Number],
   },
-  total: {
-    type: Number,
-  },
+
   shippingCost: {
     type: Number,
   },
@@ -29,12 +27,13 @@ const orderSchema = new Schema({
   },
 
   ammountToPay: {
-    type: number,
+    type: Number,
   },
 
   status: {
-    enum: ["pending", "delivered", "shipped", "canceled"],
-    default: "pending",
+    type: String,
+    enum: ["Pending", "delivered", "shipped", "canceled"],
+    default: "Pending",
   },
 
   date: {
