@@ -69,6 +69,46 @@ router.get("/createdOrders/:owner", (req, res, next) => {
     });
 });
 
+
+router.post("/addProduct/:order_id/:product_id", (req, res, next) => {
+  const { order_id, product_id } = req.params;
+
+  Order
+    .findByIdAndUpdate(order_id, { "$addToSet": { "products": { product: product_id, quantity } } })
+    .then((response) => res.json(response))
+    .catch((err) => {
+      next(err);
+    });
+})
+
+router.post("/removeProduct/:order_id/:product_id", (req, res, next) => {
+  const { order_id, product_id } = req.params;
+
+  Order
+    .findByIdAndUpdate(order_id, { "$pull": { "products": { product: product_id } } })
+    .then((response) => res.json(response))
+    .catch((err) => {
+      next(err);
+    });
+})
+
+
+router.put("/updateProduct/:order_id/products/:product_id", (req, res) => {
+  const { order_id, product_id } = req.params;
+  const { quantity } = req.body;
+  Order.findOneAndUpdate(
+    { _id: order_id, "products.product": product_id },
+    { $set: { "products.$.quantity": quantity } },
+    { new: true }
+  )
+    .then((order) => res.json(order))
+    .catch((err) => res.status(500).json(err));
+});
+
+
+
+
+
 router.put("/updateOrder/:order_id", (req, res, next) => {
   const { order_id } = req.params;
   user_id = req.payload;
