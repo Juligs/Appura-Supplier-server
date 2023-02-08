@@ -12,11 +12,23 @@ router.get("/getAllProducts", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
-router.get("/getOneProduct/:product_id", (req, res, next) => {
+router.get("/details/:product_id", (req, res, next) => {
   const { product_id } = req.params;
   Product.findById(product_id)
+    .populate("owner")
     .then((response) => res.json(response))
     .catch((err) => next(err));
+});
+
+router.get("/createdProducts/:owner_id", (req, res, next) => {
+  const { owner_id } = req.params;
+
+  Product.find({ owner })
+    .populate("owner")
+    .then((response) => res.json(response))
+    .catch((err) => {
+      next(err);
+    });
 });
 
 router.post("/createProduct", (req, res, next) => {

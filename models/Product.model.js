@@ -11,6 +11,11 @@ const productSchema = new Schema({
     default: "Default Description",
   },
 
+  business: {
+    type: Schema.Types.ObjectId,
+    ref: "Business",
+  },
+
   productImg: {
     type: String,
     default:
@@ -53,6 +58,10 @@ const productSchema = new Schema({
   },
   unit: {
     enum: ["Ounces", "Pounds", "tons", "uq"],
+  },
+  minQuantity: {
+    type: Number,
+    required: true,
   },
 });
 

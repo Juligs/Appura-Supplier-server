@@ -29,6 +29,11 @@ const businessSchema = new Schema(
       ref: "User",
     },
 
+    productList: {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+    },
+
     rating: {
       type: Array,
       min: 0,
