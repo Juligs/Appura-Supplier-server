@@ -23,11 +23,12 @@ const orderSchema = new Schema({
   },
 
   paymentMethod: {
-    enum: ["Credit Card", "Cash", "PayPal"],
+    enum: ["Credit_Card", "Cash", "PayPal"],
   },
 
   ammountToPay: {
     type: Number,
+    min: 0,
   },
 
   status: {
@@ -36,9 +37,12 @@ const orderSchema = new Schema({
     default: "Pending",
   },
 
-  date: {
+  purchaseDate: {
     type: Date,
-    default: Date.now,
+  },
+
+  estimatedDeliveryDate: {
+    type: Date,
   },
 
   products: [

@@ -29,17 +29,33 @@ const businessSchema = new Schema(
       ref: "User",
     },
 
-    productList: {
-      type: Schema.Types.ObjectId,
-      ref: "Product",
+    employees: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+
+    minOrderRequired: {
+      type: Number,
+      min: 0,
     },
 
-    rating: {
-      type: Array,
-      min: 0,
-      max: 5,
-    },
+    productList: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
+
+    // //esto esta mal
+    // rating: {
+    //   type: Array,
+    //   min: 0,
+    //   max: 5,
+    // },
   },
+
   {
     timestamps: true,
   }

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Product = require("./../models/Product.model");
+const Business = require("../models/Business.model");
 
 router.get("/getAllProducts", (req, res) => {
   Product.find()
@@ -23,7 +24,7 @@ router.get("/details/:product_id", (req, res, next) => {
 router.get("/createdProducts/:owner_id", (req, res, next) => {
   const { owner_id } = req.params;
 
-  Product.find({ owner })
+  Product.find({ owner_id })
     .populate("owner")
     .then((response) => res.json(response))
     .catch((err) => {
@@ -31,10 +32,29 @@ router.get("/createdProducts/:owner_id", (req, res, next) => {
     });
 });
 
-router.post("/createProduct", (req, res, next) => {
-  Product.create(req.body)
-    .then((response) => res.json(response))
-    .catch((err) => next(err));
-});
+// router.post("/createProduct", (req, res, next) => {
+//   const { business_id } = req.body;
+//   console.log(business_id);
+
+//   Business.findById(business_id)
+//     .then((business) => {
+//       if (!business) {
+//         return res.status(400).json({
+//           message: "Business not found",
+//         });
+//       }
+
+//       Product.create(req.body)
+//         .then((product) => {
+//           business.productList.push(product._id);
+//           business
+//             .save()
+//             .then((response) => res.json(response))
+//             .catch((err) => next(err));
+//         })
+//         .catch((err) => next(err));
+//     })
+//     .catch((err) => next(err));
+// });
 
 module.exports = router;

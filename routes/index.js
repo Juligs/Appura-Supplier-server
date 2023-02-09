@@ -4,6 +4,12 @@ module.exports = (app) => {
 
   const ordersRoutes = require("./order.routes");
   app.use("/api/orders", ordersRoutes);
+
+  // const authRoutes = require("./auth.routes");
+  // app.use("/api/auth", authRoutes);
+
+  const bussinesRoutes = require("./business.routes");
+  app.use("/api/business", bussinesRoutes);
 };
 
 // const appuraRoutes = require("./appura.routes");

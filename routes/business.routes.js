@@ -1,5 +1,12 @@
 const router = require("express").Router();
-const Product = require("./../models/Business.model");
+const Business = require("./../models/Business.model");
+const Product = require("./../models/Product.model");
+
+router.post("/createBusiness", (req, res, next) => {
+  Business.create(req.body)
+    .then((response) => res.json(response))
+    .catch((err) => next(err));
+});
 
 router.get("/getAllBusinesses", (req, res) => {
   Business.find()
@@ -45,4 +52,25 @@ router.post("/myProducts/:products_id", (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.post("/createProduct/:business_id", (req, res, next) => {
+  const { business_id } = req.params;
+  Business.findById(business_id)
+    .then((business) => {
+      if (!business) {
+        return res.status(400).json({
+          message: "Business not found",
+        });
+      }
+      Product.create({ ...req.body, business: business_id })
+        .then((product) => {
+          business.productList.push(product._id);
+          business
+            .save()
+            .then((response) => res.json(response))
+            .catch((err) => next(err));
+        })
+        .catch((err) => next(err));
+    })
+    .catch((err) => next(err));
+});
 module.exports = router;

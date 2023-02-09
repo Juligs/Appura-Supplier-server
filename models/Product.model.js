@@ -11,10 +11,10 @@ const productSchema = new Schema({
     default: "Default Description",
   },
 
-  business: {
-    type: Schema.Types.ObjectId,
-    ref: "Business",
-  },
+  // business: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Business",
+  // },
 
   productImg: {
     type: String,
@@ -56,12 +56,9 @@ const productSchema = new Schema({
     min: 0,
     required: [true, "Please enter a correct price"],
   },
+
   unit: {
     enum: ["Ounces", "Pounds", "tons", "uq"],
-  },
-  minQuantity: {
-    type: Number,
-    required: true,
   },
 });
 
