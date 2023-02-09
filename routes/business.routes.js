@@ -1,9 +1,13 @@
 const router = require("express").Router();
 const Business = require("./../models/Business.model");
 const Product = require("./../models/Product.model");
+const { isAuthenticated } = require('./../midleware/jwt.middleware');
 
-router.post("/createBusiness", (req, res, next) => {
-  Business.create(req.body)
+router.post("/createBusiness", isAuthenticated, (req, res, next) => {
+  const owner = req.payload._id
+
+  Business
+    .create({ ...req.body, owner })
     .then((response) => res.json(response))
     .catch((err) => next(err));
 });
