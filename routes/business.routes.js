@@ -50,7 +50,7 @@ router.post("/myProducts/:products_id", (req, res, next) => {
   businesses_id = req.payload;
 
   Bussines.findByIdAndUpdate(businesses_id, {
-    $addToSet: { myProducts: products_id },
+    $addToSet: { productList: products_id },
   })
     .then((response) => res.json(response))
     .catch((err) => next(err));
