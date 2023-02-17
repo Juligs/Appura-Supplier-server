@@ -14,6 +14,7 @@ router.post("/createBusiness", isAuthenticated, (req, res, next) => {
 
 router.get("/getAllBusinesses", (req, res) => {
   Business.find()
+    .select({ name: 1, businessImg: 1, location: 1 })
     .then((response) => res.json(response))
     .catch((err) => res.status(500).json(err));
 });
