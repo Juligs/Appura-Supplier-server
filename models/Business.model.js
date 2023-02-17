@@ -27,6 +27,7 @@ const businessSchema = new Schema(
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: [true, "Error - owner is mandatory"],
     },
 
     employees: [
