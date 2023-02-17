@@ -8,8 +8,8 @@ router.post("/createBusiness", isAuthenticated, (req, res, next) => {
 
   Business
     .create({ ...req.body, owner })
-    .then((response) => res.json(response))
-    .catch((err) => next(err));
+    .then(response => setTimeout(() => res.json(response), 3000))
+    .catch((err) => next(err).json(err));
 });
 
 router.get("/getAllBusinesses", (req, res) => {
