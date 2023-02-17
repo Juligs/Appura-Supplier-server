@@ -19,9 +19,10 @@ router.get("/getAllBusinesses", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
-router.get("/details/:businesses_id", (req, res, next) => {
-  const { businesses_id } = req.params;
-  Product.findById(businesses_id)
+router.get("/details/:business_id", (req, res, next) => {
+  const { business_id } = req.params;
+  Business
+    .findById(business_id)
     .select({
       name: 1,
       location: 1,
@@ -33,12 +34,22 @@ router.get("/details/:businesses_id", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-router.put("/edit/:businesses_id", (req, res) => {
-  const { name, description, location, businessImg } = req.body;
-  const { businesses_id } = req.params;
+// router.get("/:feeling_id", (req, res, next) => {
 
-  Bussines.findByIdAndUpdate(
-    businesses_id,
+//   const { feeling_id } = req.params
+
+//   Feeling
+//     .findById(feeling_id)
+//     .then(response => res.json(response))
+//     .catch(err => next(err))
+// })
+
+router.put("/edit/:business_id", (req, res) => {
+  const { name, description, location, businessImg } = req.body;
+  const { business_id } = req.params;
+
+  Business.findByIdAndUpdate(
+    business_id,
     { name, description, location, businessImg },
     { new: true }
   )
@@ -48,9 +59,9 @@ router.put("/edit/:businesses_id", (req, res) => {
 
 router.post("/myProducts/:products_id", (req, res, next) => {
   const { products_id } = req.params;
-  businesses_id = req.payload;
+  business_id = req.payload;
 
-  Bussines.findByIdAndUpdate(businesses_id, {
+  Bussines.findByIdAndUpdate(business_id, {
     $addToSet: { productList: products_id },
   })
     .then((response) => res.json(response))

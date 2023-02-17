@@ -33,7 +33,7 @@ router.get("/createdProducts/:owner_id", (req, res, next) => {
 });
 
 // router.post("/createProduct", (req, res, next) => {
-//   const { business_id } = req.body;
+//   const {  } = req.body;
 //   console.log(business_id);
 
 //   Business.findById(business_id)
