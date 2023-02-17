@@ -58,7 +58,8 @@ const productSchema = new Schema({
   },
 
   unit: {
-    enum: ["Ounces", "Pounds", "tons", "uq"],
+    type: String,
+    enum: ["g", "mg", "kg", "mm"],
   },
 });
 
