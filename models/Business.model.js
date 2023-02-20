@@ -8,7 +8,7 @@ const businessSchema = new Schema(
       unique: true,
     },
 
-    decription: {
+    description: {
       type: String,
       default: "Default Description",
     },

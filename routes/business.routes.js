@@ -1,14 +1,13 @@
 const router = require("express").Router();
 const Business = require("./../models/Business.model");
 const Product = require("./../models/Product.model");
-const { isAuthenticated } = require('./../midleware/jwt.middleware');
+const { isAuthenticated } = require("./../midleware/jwt.middleware");
 
-router.post("/createBusiness", isAuthenticated, (req, res, next) => {
-  const owner = req.payload._id
+router.post("/newBusiness", isAuthenticated, (req, res, next) => {
+  const owner = req.payload._id;
 
-  Business
-    .create({ ...req.body, owner })
-    .then(response => setTimeout(() => res.json(response), 3000))
+  Business.create({ ...req.body, owner })
+    .then((response) => setTimeout(() => res.json(response), 3000))
     .catch((err) => next(err).json(err));
 });
 
@@ -21,13 +20,13 @@ router.get("/getAllBusinesses", (req, res) => {
 
 router.get("/details/:business_id", (req, res, next) => {
   const { business_id } = req.params;
-  Business
-    .findById(business_id)
+  Business.findById(business_id)
     .select({
       name: 1,
       location: 1,
       businessImg: 1,
       rating: 1,
+      productList: 1,
     })
     .populate("productList")
     .then((response) => res.json(response))
