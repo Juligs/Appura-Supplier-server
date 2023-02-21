@@ -10,6 +10,9 @@ module.exports = (app) => {
 
   const bussinesRoutes = require("./business.routes");
   app.use("/api/business", bussinesRoutes);
+
+  const uploadRoutes = require("./upload.routes");
+  app.use("/api/upload", uploadRoutes);
 };
 
 // const appuraRoutes = require("./appura.routes");
