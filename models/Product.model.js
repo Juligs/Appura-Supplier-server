@@ -54,7 +54,6 @@ const productSchema = new Schema({
   pricePerUnit: {
     type: Number,
     min: 0,
-    required: [true, "Please enter a correct price"],
   },
 
   unit: {

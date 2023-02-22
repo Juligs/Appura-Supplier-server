@@ -68,6 +68,8 @@ router.post("/myProducts/:products_id", (req, res, next) => {
 });
 
 router.post("/createProduct/:business_id", (req, res, next) => {
+  console.log(req.body);
+  delete req.body._id;
   const { business_id } = req.params;
   Business.findById(business_id)
     .then((business) => {
