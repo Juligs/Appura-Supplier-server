@@ -5,6 +5,7 @@ const { isAuthenticated } = require("./../midleware/jwt.middleware");
 
 router.post("/newBusiness", isAuthenticated, (req, res, next) => {
   const owner = req.payload._id;
+  delete req.body._id;
 
   Business.create({ ...req.body, owner })
     .then((response) => setTimeout(() => res.json(response), 3000))
