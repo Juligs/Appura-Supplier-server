@@ -26,6 +26,7 @@ router.get("/details/:business_id", (req, res, next) => {
       name: 1,
       location: 1,
       businessImg: 1,
+      description: 1,
       rating: 1,
       productList: 1,
     })
