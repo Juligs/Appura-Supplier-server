@@ -35,16 +35,6 @@ router.get("/details/:business_id", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-// router.get("/:feeling_id", (req, res, next) => {
-
-//   const { feeling_id } = req.params
-
-//   Feeling
-//     .findById(feeling_id)
-//     .then(response => res.json(response))
-//     .catch(err => next(err))
-// })
-
 router.put("/edit/:business_id", (req, res) => {
   const { name, description, location, businessImg } = req.body;
   const { business_id } = req.params;
